@@ -229,7 +229,7 @@ body {
 						</div>
 						<div style="padding-left: 25px; margin-bottom: 10px;">
 							<div class="form-check">
-								<input class="form-check-input" type="checkbox" name="remember" value="true" id="rememberMe">
+								<input class="form-check-input" type="checkbox" value="true" id="rememberMe">
 								<label class="form-check-label" for="rememberMe">기억하기</label>
 							</div>
 						</div>
@@ -320,7 +320,7 @@ body {
         }
     }
 
-	// 회원가입
+	// 회원가입 패널 오픈
 	$(function() {
 		$("#joinPanel").click(
 				function() {
@@ -379,7 +379,62 @@ body {
 			$(window).off('mouseup', stopResize);
 		}
 	})
+	
+	// 아이디 저장 프로세스
+	$(function(){
+		var key = getCookie("savedId"); // savedId 라는 이름의 쿠키를 가져옮
+		
+		if(key != ""){ // 쿠키가 존재하면 입력한 아이디 값을 쿠키값으로 설정
+			$("#userId").val(key); 
+		}
+		 
+		if($("#userId").val() != ""){ // 쿠키가 존재해서 아이디 값으로 할당돼있으면 체크박스 체크
+			$("#rememberMe").attr("checked", true); 
+		}
+		 
+		$("#rememberMe").change(function(){ 
+			if($("#rememberMe").is(":checked")){ 
+				setCookie("savedId", $("#userId").val(), 7); // 체크돼있으면 7일동안 입력한 아이디로 쿠키 저장
+			}else{ 
+				deleteCookie("savedId"); // 체크해제 시 쿠키삭제
+			}
+		});
+		 
+		$("#userId").keyup(function(){ 
+			if($("#rememberMe").is(":checked")){ // 새로운 아이디 입력 후 체크돼있으면 입력된 아이디로 쿠키 저장
+				setCookie("savedId", $("#userId").val(), 7); 
+			}
+		});
+	})
+	
+	function setCookie(cookieName, value, exdays){
+    var exdate = new Date();
+    exdate.setDate(exdate.getDate() + exdays); // 쿠키 만료 날짜 설정
+    // escape 함수를 사용하여 value를 인코딩, 만료 날짜를 문자열로 변환 후 쿠키 값을 구성
+    var cookieValue = escape(value) + ((exdays==null) ? "" : "; expires=" + exdate.toGMTString());
+    document.cookie = cookieName + "=" + cookieValue; // 쿠키 저장
+	}
+	 
+	function deleteCookie(cookieName){
+		var expireDate = new Date();
+		expireDate.setDate(expireDate.getDate() - 1); // 만료 날짜를 현재 날짜 -1로 설정
+		document.cookie = cookieName + "= " + "; expires=" + expireDate.toGMTString(); // 쿠키 삭제
+	}
 
+	function getCookie(cookieName) {
+		cookieName = cookieName + '=';
+		var cookieData = document.cookie;
+		var start = cookieData.indexOf(cookieName); // 쿠키 문자열을 가져오고 지정한 cookieName을 찾음
+		var cookieValue = '';  
+		if(start != -1){
+			start += cookieName.length;
+			var end = cookieData.indexOf(';', start);
+			if(end == -1)end = cookieData.length;
+			cookieValue = cookieData.substring(start, end);
+		} // cookieName을 찾으면 해당 쿠키의 값을 반환하고 쿠키가 존재하지 않으면 빈 문자열을 반환
+		return unescape(cookieValue);
+	}
+		
 	// 콤보박스 회사명 꾸려주는 코드
 	$(function() {
 		call_server(hiddenform, "/comp/getCompName", getCompName);
