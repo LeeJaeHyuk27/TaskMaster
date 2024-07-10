@@ -11,7 +11,6 @@ function getLocalTimeZone(){
 
 function call_server(f,url, cbFunc){
 	var formData = new FormData($(f)[0]);
-	console.log(formData);
 	$.ajax({
 			data : formData,
 			type : "POST",
@@ -27,7 +26,6 @@ function call_server(f,url, cbFunc){
 				}
 		    }
 		});
-		
 	
 }
 

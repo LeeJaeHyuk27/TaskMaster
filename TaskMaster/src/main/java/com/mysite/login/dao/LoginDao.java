@@ -12,4 +12,6 @@ public interface LoginDao {
 	// 로그인
 	public UserInfoVO selectUserInfo(UserInfoVO vo) throws Exception;
 	
+	// 회원가입
+	public int insertUserInfo(UserInfoVO vo) throws Exception;
 }

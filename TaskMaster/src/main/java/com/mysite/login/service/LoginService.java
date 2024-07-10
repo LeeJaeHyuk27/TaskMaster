@@ -16,4 +16,9 @@ public class LoginService {
 	public UserInfoVO selectUserInfo(UserInfoVO vo) throws Exception{
 		return dao.selectUserInfo(vo);
 	}
+	
+	// 회원가입
+	public int insertUserInfo(UserInfoVO vo) throws Exception{
+		return dao.insertUserInfo(vo);
+	}
 }

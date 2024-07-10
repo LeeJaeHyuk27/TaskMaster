@@ -12,6 +12,16 @@ public class LoginDaoImpl implements LoginDao {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	// 회원가입
+	@Override
+	public int insertUserInfo(UserInfoVO vo) throws Exception {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	
+
 	
 	
 	

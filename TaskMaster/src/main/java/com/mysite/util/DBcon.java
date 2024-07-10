@@ -29,7 +29,5 @@ public class DBcon {
 			e.printStackTrace();        
 			}    
 		}        
-	public static void main(String[] args){        
-		DBcon dbcon    = new DBcon();    
-	}
+
 }

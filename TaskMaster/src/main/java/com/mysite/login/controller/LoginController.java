@@ -26,7 +26,7 @@ public class LoginController {
 	}
 	
 	// 로그인
-	@RequestMapping("loginProcess")
+	@RequestMapping("/loginProcess")
 	@ResponseBody
 	public MessageVO loginProcess(@ModelAttribute UserInfoVO vo, HttpServletRequest request) throws Exception{
 		
@@ -40,9 +40,13 @@ public class LoginController {
 			if(vo.getPassword().equals(pwd)) {  //동일한 패스워드일 경우.
 				//세션저장
 				HttpSession session = request.getSession();
-				 session.setAttribute("TaskMaster", vo);
-				msgvo.setResult(true);
-				
+				session.setAttribute("TaskMaster", vo);
+				if(vo.getAuthYn().equals("Y")) {
+					msgvo.setResult(true);
+				}else {
+					msgvo.setResult(false);
+					msgvo.setMsg("로그인 권한이 없습니다.");
+				}
 			}else {	//패스워드가 동일하지 않을 경우
 				msgvo.setResult(false);
 				msgvo.setMsg("패스워드가 일치하지 않습니다.");
@@ -57,5 +61,31 @@ public class LoginController {
 	@RequestMapping("/test")
 	public String test()throws Exception{
 		return "/test";
+	}
+	
+	// 회원가입
+	@RequestMapping("/joinProcess")
+	@ResponseBody
+	public MessageVO joinProcess(@ModelAttribute UserInfoVO vo)throws Exception{
+		
+		MessageVO msgvo = new MessageVO();
+		UserInfoVO vo2 = new UserInfoVO();
+		vo.setPassword(AesUtil.aesEncode(vo.getPassword()));
+		
+		vo2 = service.selectUserInfo(vo2);
+		
+		if(vo2!=null) {	// 등록 이메일일 경우
+			msgvo.setResult(false);
+			msgvo.setMsg("이미 가입된 이메일 입니다.");
+		}else {  // 등록 이메일이 아닐경우
+			service.insertUserInfo(vo);
+			msgvo.setResult(true);
+			msgvo.setMsg("회원가입 신청이 완료되었습니다 담당자가 승인하면 메일이 발송됩니다.");
+		}
+		return msgvo;
+	}
+	@RequestMapping("/main")
+	public String main() throws Exception{
+		return "/main";
 	}
 }
