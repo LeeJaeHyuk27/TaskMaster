@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mysite.alarm.dao.AlarmDao">
+
+	<insert id="createAlarm">
+    	INSERT INTO PROJ.TB_ALARM (PROJECT_SEQ, TASK_SEQ, USER_ID, CREATE_USER_ID, ALARM_CONTENTS, ALARM_TYPE, READ_YN, REG_DATE)
+    	VALUES (#{projectSeq}, #{taskSeq}, #{userId}, #{createUserId}, #{alarmContents}, #{alarmType}, 'N', NOW());
+  	</insert>
+
+  	<select id="getProjectName" resultType="string">
+		SELECT POREJCT_NAME
+		FROM PROJ.TB_PROJECT_INFO
+		WHERE PROEJCT_SEQ = #{projectSeq}
+	</select>
+
+	<select id="getTaskName" resultType="string">
+		SELECT TASK_NAME
+		FROM PROJ.TB_TASK_INFO
+		WHERE TASK_SEQ = #{taskSeq}
+	</select>
+
+	<select id="getAlarm" resultType="com.mysite.alarm.vo.AlarmVO">
+		SELECT 
+			ALARM_SEQ AS alarmSeq,
+			PROJECT_SEQ AS projectSeq,
+			TASK_SEQ AS taskSeq,
+			USER_ID AS userId,
+			CREATE_USER_ID AS createUserId,
+			ALARM_CONTENTS AS alarmContents,
+			ALARM_TYPE AS alarmType,
+			READ_YN AS readYn,
+			DATE_FORMAT(REG_DATE, '%Y-%m-%d %T' ) AS regDate
+		FROM PROJ.TB_ALARM
+		WHERE USER_ID = #{userId}
+		ORDER BY ALARM_SEQ DESC
+	</select>
+	
+</mapper>
