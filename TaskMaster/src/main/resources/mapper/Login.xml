@@ -32,11 +32,11 @@
 	        COMPANY_CD,
 	        JOIN_DATE
 	    ) VALUES (
-	        CONCAT(#{userId}, '@', #{email}),
+	        CONCAT(#{userId}, #{email}),
 	        #{userName},
 	        #{password},
 	        #{companyCd},
-	        SYSDATE()
+	        NOW()
 	    )
 	</insert>
 	
