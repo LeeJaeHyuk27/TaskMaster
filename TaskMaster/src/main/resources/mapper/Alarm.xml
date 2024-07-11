@@ -8,9 +8,9 @@
   	</insert>
 
   	<select id="getProjectName" resultType="string">
-		SELECT POREJCT_NAME
+		SELECT PROJECT_NAME
 		FROM PROJ.TB_PROJECT_INFO
-		WHERE PROEJCT_SEQ = #{projectSeq}
+		WHERE PROJECT_SEQ = #{projectSeq}
 	</select>
 
 	<select id="getTaskName" resultType="string">
