@@ -10,6 +10,7 @@ import com.mysite.login.service.LoginService;
 import com.mysite.common.vo.MessageVO;
 import com.mysite.login.vo.UserInfoVO;
 import com.mysite.util.AesUtil;
+import com.mysite.util.TempKey;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -78,6 +79,10 @@ public class LoginController {
 			msgvo.setResult(false);
 			msgvo.setMsg("이미 가입된 이메일 입니다.");
 		}else {  // 등록 이메일이 아닐경우
+			// 인증키 생성
+			String key = new TempKey().getKey(10, false);
+			vo.setAuthKey(key);
+
 			service.insertUserInfo(vo);
 			msgvo.setResult(true);
 			msgvo.setMsg("회원가입 신청이 완료되었습니다 담당자가 승인하면 메일이 발송됩니다.");
