@@ -314,7 +314,7 @@ body {
 	
 	function confirmLogin(vo){
         if(vo.result){
-            location.href="/test";
+            location.href="/main";
         }else{
             alert(vo.msg);
         }

@@ -27,8 +27,6 @@ function call_server(f,url, cbFunc){
 				}
 		    }
 		});
-		
-	
 }
 
 

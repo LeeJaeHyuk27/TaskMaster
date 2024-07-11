@@ -18,7 +18,7 @@ public class DBcon {
 			con = DriverManager.getConnection(                    
 					"jdbc:mariadb://127.0.0.1:3306/proj",                    
 					"root",                    
-					"Dlwogur8599");                        
+					"1234");                        
 			if( con != null ) {                
 				System.out.println("DB 접속 성공");            
 			}                    
