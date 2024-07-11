@@ -202,7 +202,7 @@ body {
 				<div id="container">
 					<div id="item-container">
 						<!-- 회사 인증 승인 탭 -->
-						<ul class="nav nav-tabs">
+						<ul class="nav nav-tabs nav-justified nav-justified">
 							<li class="nav-item"><a class="nav-link active"
 								data-toggle="tab" href="#allowCompany">회사 인증 승인</a></li>
 							<li class="nav-item"><a class="nav-link" data-toggle="tab"
@@ -231,7 +231,7 @@ body {
 							</table>
 						</div>
 						<!-- 사용자 삭제 탭 -->
-						<ul class="nav nav-tabs">
+						<ul class="nav nav-tabs nav-justified">
 							<li class="nav-item"><a class="nav-link" data-toggle="tab"
 								href="#allowCompany">회사 인증 승인</a></li>
 							<li class="nav-item"><a class="nav-link active"
@@ -261,7 +261,7 @@ body {
 							</table>
 						</div>
 						<!-- 프로젝트 관리 탭 -->
-						<ul class="nav nav-tabs">
+						<ul class="nav nav-tabs nav-justified">
 							<li class="nav-item"><a class="nav-link" data-toggle="tab"
 								href="#allowCompany">회사 인증 승인</a></li>
 							<li class="nav-item"><a class="nav-link" data-toggle="tab"
@@ -317,6 +317,24 @@ body {
 	</div>
 </body>
 <script>
+
+	// 사용자 승인 테이블
+	$(function (){
+		$.ajax({
+			   url: "/admin/getAllowUser",
+			   type: 'post',
+			   success: function (result) {
+			      getAllowUser(result);
+			   },
+			   error: function (request, status, error) {
+			      console.log(error);
+			   }
+			})
+	})
+	
+	function getAllowUser(list){
+		console.log(list);
+	}
 	$(document).ready(function() {
 		$('.item').click(function() {
 		const title = this.getAttribute('data-title');

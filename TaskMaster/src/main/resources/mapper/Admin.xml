@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mysite.admin.dao.AdminDao">
+	
+	<resultMap type="com.mysite.login.vo.UserInfoVO" id="userMap">
+		<result property="userId" 		column="USER_ID"/>
+		<result property="userName" 	column="USER_NAME"/>
+		<result property="password" 	column="PASSWORD"/>
+		<result property="companyCd" 	column="COMPANY_CD"/>
+		<result property="authKey" 		column="AUTH_KEY"/>
+		<result property="authYn" 		column="AUTH_YN"/>
+		<result property="compAdminYn" 	column="COMP_ADMIN_YN"/>
+		<result property="joinDate" 	column="JOIN_DATE"/>
+		<result property="email" 		column="EMAIL"/>
+	</resultMap>
+	<select id="getAllowUser" resultMap="userMap">
+		SELECT
+		    t1.USER_ID,
+		    t1.USER_NAME
+		FROM
+		    tb_user_info t1
+		JOIN
+		    (SELECT COMPANY_CD
+		     FROM TB_USER_INFO
+		     WHERE USER_ID = #{userId}) t2
+		ON
+		    t1.COMPANY_CD = t2.COMPANY_CD
+		WHERE
+		    t1.AUTH_YN = 'N'
+	</select>
+
+	
+</mapper>

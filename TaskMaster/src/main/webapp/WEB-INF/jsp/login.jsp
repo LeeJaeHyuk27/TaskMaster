@@ -348,7 +348,7 @@ body {
 
 	function confirmLogin(vo) {
 		if (vo.result) {
-			location.href = "/test";
+			location.href = "/admin";
 		} else {
 			alert(vo.msg);
 		}

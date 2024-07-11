@@ -34,6 +34,7 @@ public class LoginController {
 		MessageVO msgvo = new MessageVO();
 		
 		String pwd = AesUtil.aesEncode(vo.getPassword());
+		System.out.println(pwd);
 		vo = service.selectUserInfo(vo);
 		
 		if(vo!=null) {	//등록 아이디일 경우
@@ -57,11 +58,6 @@ public class LoginController {
 			msgvo.setMsg("미등록 회원아이디 입니다.");
 		}
 		return msgvo;
-	}
-	
-	@RequestMapping("/test")
-	public String test()throws Exception{
-		return "/test";
 	}
 	
 	// 회원가입
@@ -89,8 +85,5 @@ public class LoginController {
 		}
 		return msgvo;
 	}
-	@RequestMapping("/main")
-	public String main() throws Exception{
-		return "/main";
-	}
+
 }
