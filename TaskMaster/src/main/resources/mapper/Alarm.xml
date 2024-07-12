@@ -34,5 +34,30 @@
 		WHERE USER_ID = #{userId}
 		ORDER BY ALARM_SEQ DESC
 	</select>
+
+	<select id="getCompanyAdminList" resultType="com.mysite.login.vo.UserInfoVO">
+		SELECT 
+			USER_ID AS userId
+		FROM PROJ.TB_USER_INFO
+		WHERE 
+			COMPANY_CD = #{companyCd}
+			AND COMP_ADMIN_YN = 'Y'
+	</select>
+
+	<select id="getTaskAllocationUserList" resultType="com.mysite.login.vo.UserInfoVO">
+		SELECT 
+			USER_ID AS userId
+		FROM PROJ.TB_TASK_MEMBER
+		WHERE 
+			TASK_SEQ = #{taskSeq}
+	</select>
+	
+	<select id="getReplyUser" resultType="com.mysite.login.vo.UserInfoVO">
+		SELECT 
+			USER_ID AS userId
+		FROM PROJ.TB_TASK_REPLY
+		WHERE 
+			REPLY_SEQ = #{replySeq}
+	</select>
 	
 </mapper>
