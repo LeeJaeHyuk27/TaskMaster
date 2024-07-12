@@ -5,6 +5,8 @@ public class AlarmVO {
     private Integer alarmSeq;
 	private Integer projectSeq;
 	private Integer taskSeq;
+	private Integer replySeq;
+	private String companyCd;
 	private String userId;
 	private String createUserId;
 	private String alarmContents;
@@ -31,6 +33,20 @@ public class AlarmVO {
 	}
 	public void setTaskSeq(Integer taskSeq) {
 		this.taskSeq = taskSeq;
+	}
+
+	public Integer getReplySeq() {
+		return replySeq;
+	}
+	public void setReplySeq(Integer replySeq) {
+		this.replySeq = replySeq;
+	}
+
+	public String getCompanyCd() {
+		return companyCd;
+	}
+	public void setCompanyCd(String companyCd) {
+		this.companyCd = companyCd;
 	}
 
     public String getUserId() {

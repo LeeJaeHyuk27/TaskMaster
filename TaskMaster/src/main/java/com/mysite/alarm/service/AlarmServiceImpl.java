@@ -37,40 +37,71 @@ public class AlarmServiceImpl implements AlarmService {
             if (alarm_type.equals(COM_APPROVAL.getVal())) { 
                 // 회사 승인
                 create_alarm_text = user_vo.getUserName() + "님이 회사 승인을 요청하였습니다.";
+                vo.setAlarmContents(create_alarm_text);
+
+                // 회사 관리자 유저 리스트 조회
+                List<UserInfoVO> company_user_vo_list = alarmDao.getCompanyAdminList(vo.getCompanyCd());
+                
+                for(UserInfoVO adminUser : company_user_vo_list){
+                    vo.setUserId(adminUser.getUserId());
+                    alarmDao.createAlarm(vo);
+                }
+
             } else if (alarm_type.equals(PROJ_INVITATION.getVal())) { 
                 // 프로젝트 초대
                 int projectSeq = vo.getProjectSeq();
                 String project_name = alarmDao.getProjectName(projectSeq);
                 create_alarm_text = user_vo.getUserName() + "님이 '" + project_name + "' 프로젝트에 초대하였습니다.";
+                vo.setAlarmContents(create_alarm_text);
+
+                alarmDao.createAlarm(vo);
+
             } else if (alarm_type.equals(TASK_ALLOCATOIN.getVal())) { 
                 // 업무 할당
                 int taskSeq = vo.getTaskSeq();
                 String task_name = alarmDao.getTaskName(taskSeq);
                 create_alarm_text = user_vo.getUserName() + "님이 '" + task_name + "' 업무를 할당하였습니다.";
+                vo.setAlarmContents(create_alarm_text);
+
+                alarmDao.createAlarm(vo);
+
             } else if (alarm_type.equals(REPLY.getVal())) { 
                 // 댓글
                 int taskSeq = vo.getTaskSeq();
                 String task_name = alarmDao.getTaskName(taskSeq);
                 create_alarm_text = "'" + task_name + "' 업무에 " + user_vo.getUserName() + "님이 댓글을 작성하였습니다.";
+                vo.setAlarmContents(create_alarm_text);
+
+                // 댓글이 작성된 업무에 할당된 유저 리스트 조회
+                List<UserInfoVO> task_allocation_user_vo_list = alarmDao.getTaskAllocationUserList(vo.getTaskSeq());
+
+                for(UserInfoVO task_user : task_allocation_user_vo_list){
+                    vo.setUserId(task_user.getUserId());
+                    alarmDao.createAlarm(vo);
+                }
+
             } else if (alarm_type.equals(RE_REPLY.getVal())) { 
                 // 대댓글
                 int taskSeq = vo.getTaskSeq();
                 String task_name = alarmDao.getTaskName(taskSeq);
                 create_alarm_text = "'" + task_name + "'업무에 " + user_vo.getUserName() + "님이 대댓글을 작성하였습니다.";
+                vo.setAlarmContents(create_alarm_text);
+
+                // 대댓글이 작성된 댓글의 작성자 유저 조회
+                UserInfoVO reply_user_vo = alarmDao.getReplyUser(vo.getReplySeq());
+                vo.setUserId(reply_user_vo.getUserId());
+                alarmDao.createAlarm(vo);
+
             } else {
                 throw new Exception("This is an unregistered alarm type.");
             }
 
-            vo.setAlarmContents(create_alarm_text);
-            alarmDao.createAlarm(vo);
-
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            throw e;
+            return e.getMessage();
         }
 
-        String return_msg = vo.getUserId() + "에게 알람이 생성되었습니다. 알람 내용 : '" + create_alarm_text + "'";
-
+        String return_msg = "알람이 생성되었습니다. 알람 내용 : '" + create_alarm_text + "'";
         return return_msg;
     }
 
