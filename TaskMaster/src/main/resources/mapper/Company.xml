@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mysite.company.dao.CompDao">
+	
+	<resultMap type="com.mysite.company.vo.CompVO" id="compMap">
+		<result property="companyCd" 		column="COMPANY_CD"/>
+		<result property="companyName" 	column="COMPANY_NAME"/>
+	</resultMap>
+	
+	<select id="selectCompName" resultMap="compMap">
+		SELECT
+			COMPANY_CD,
+			COMPANY_NAME
+		FROM
+			TB_COMPANY_INFO
+	</select>
+
+	
+</mapper>

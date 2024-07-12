@@ -11,17 +11,33 @@
 		<result property="authYn" 		column="AUTH_YN"/>
 		<result property="compAdminYn" 	column="COMP_ADMIN_YN"/>
 		<result property="joinDate" 	column="JOIN_DATE"/>
+		<result property="email" 		column="EMAIL"/>
 	</resultMap>
 	<select id="selectUserInfo" resultMap="userMap">
 		SELECT
 			USER_ID,
 			USER_NAME,
-			PASSWORD
+			PASSWORD,
+			AUTH_YN
 		FROM
 			TB_USER_INFO
 		WHERE
 			USER_ID = #{userId}
 	</select>
-
+	<insert id="insertUserInfo">
+	    INSERT INTO TB_USER_INFO (
+	        USER_ID,
+	        USER_NAME,
+	        PASSWORD,
+	        COMPANY_CD,
+	        JOIN_DATE
+	    ) VALUES (
+	        CONCAT(#{userId}, '@', #{email}),
+	        #{userName},
+	        #{password},
+	        #{companyCd},
+	        SYSDATE()
+	    )
+	</insert>
 	
 </mapper>
