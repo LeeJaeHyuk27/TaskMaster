@@ -14,8 +14,18 @@ public class AdminService {
 	@Autowired
 	AdminDao dao;
 	
+	// 사용자 조회
+	public List<UserInfoVO> getUserInfo(UserInfoVO vo) throws Exception{
+		return dao.getUserInfo(vo);
+	}
+	
 	// 사용자 승인
-	public List<UserInfoVO> getAllowUser(UserInfoVO uservo) throws Exception{
-		return dao.getAllowUser(uservo);
+	public int allowUser(UserInfoVO vo)throws Exception{
+		return dao.allowUser(vo);
+	}
+	
+	// 사용자 삭제
+	public int deleteUser(UserInfoVO vo)throws Exception{
+		return dao.deleteUser(vo);
 	}
 }

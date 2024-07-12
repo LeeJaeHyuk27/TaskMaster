@@ -11,7 +11,12 @@ import com.mysite.login.vo.UserInfoVO;
 @Mapper
 public interface AdminDao {
 	
+	// 사용자 조회
+	public List<UserInfoVO> getUserInfo(UserInfoVO vo) throws Exception;
+	
 	// 사용자 승인
-	public List<UserInfoVO> getAllowUser(UserInfoVO uservo) throws Exception;
-
+	public int allowUser(UserInfoVO vo)throws Exception;
+	
+	// 사용자 삭제
+	public int deleteUser(UserInfoVO vo)throws Exception;
 }

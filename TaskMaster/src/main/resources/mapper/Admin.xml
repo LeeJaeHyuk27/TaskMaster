@@ -13,10 +13,11 @@
 		<result property="joinDate" 	column="JOIN_DATE"/>
 		<result property="email" 		column="EMAIL"/>
 	</resultMap>
-	<select id="getAllowUser" resultMap="userMap">
+	<select id="getUserInfo" resultMap="userMap">
 		SELECT
 		    t1.USER_ID,
-		    t1.USER_NAME
+		    t1.USER_NAME,
+		    t1.AUTH_YN
 		FROM
 		    tb_user_info t1
 		JOIN
@@ -26,8 +27,20 @@
 		ON
 		    t1.COMPANY_CD = t2.COMPANY_CD
 		WHERE
-		    t1.AUTH_YN = 'N'
+			COMP_ADMIN_YN = 'N'
 	</select>
-
-	
+	<update id="allowUser">
+		UPDATE
+			TB_USER_INFO
+		SET
+			AUTH_YN = 'Y'
+		WHERE
+			USER_ID = #{userId}
+	</update>
+	<delete id="deleteUser">
+		DELETE FROM
+			TB_USER_INFO
+		WHERE
+			USER_ID = #{userId}
+	</delete>
 </mapper>

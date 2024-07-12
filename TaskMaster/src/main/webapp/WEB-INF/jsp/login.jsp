@@ -528,7 +528,6 @@ body {
 
 	function getCompName(list) {
 		var str;
-		console.log(list);
 		for (var i = 0; i < list.length; i++) {
 			str += "<option value='"+list[i].companyCd+"'>"
 					+ list[i].companyName + "</option>"

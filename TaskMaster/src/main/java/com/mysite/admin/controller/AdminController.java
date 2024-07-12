@@ -25,17 +25,36 @@ public class AdminController {
 		return "/admin";
 	}
 	
-	// 사용자 승인
-	@RequestMapping("/admin/getAllowUser")
+	// 사용자 조회
+	@RequestMapping("/admin/getUserInfo")
 	@ResponseBody
-	public List<UserInfoVO> getAllowUser(@ModelAttribute UserInfoVO vo, HttpServletRequest request) throws Exception{
-		
+	public List<UserInfoVO> getUserInfo(@ModelAttribute UserInfoVO vo, HttpServletRequest request)throws Exception{
 		HttpSession session  = request.getSession();
 	    UserInfoVO uservo = (UserInfoVO) session.getAttribute("TaskMaster");
-	    System.out.println(uservo);
+	    vo.setUserId(uservo.getUserId());
 		
-		List<UserInfoVO> list = service.getAllowUser(vo);
+		List<UserInfoVO> list = service.getUserInfo(vo);
 		
 		return list;
+	}
+	
+	// 사용자 승인
+	@RequestMapping("/admin/allowUser")
+	@ResponseBody
+	public int allowUser(@ModelAttribute("UserInfoVO")UserInfoVO vo)throws Exception{
+		
+		int cnt = service.allowUser(vo);
+		
+		return cnt;
+	}
+	
+	// 사용자 삭제
+	@RequestMapping("/admin/deleteUser")
+	@ResponseBody
+	public int deleteUser(@ModelAttribute("UserInfoVO")UserInfoVO vo)throws Exception{
+		
+		int cnt = service.deleteUser(vo);
+		
+		return cnt;
 	}
 }
