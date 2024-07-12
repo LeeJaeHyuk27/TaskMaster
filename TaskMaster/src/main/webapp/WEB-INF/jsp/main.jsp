@@ -443,6 +443,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 <script src="/assets/js/common.js"></script>
 
 <script>
+	// 커밋 테스트
 	$(function() {
 		$('#newProject').click(
 				function() {
