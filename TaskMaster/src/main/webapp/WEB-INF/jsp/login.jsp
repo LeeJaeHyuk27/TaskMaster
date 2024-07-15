@@ -259,12 +259,14 @@ body {
 							<div class="panel-joinContent">
 								<div>이메일</div>
 								<div class="inputContainer">
-									<input class="joinInput" type="text" name="userId">@
-									<select class="joinInput" name="email" style="text-align: center;">
-										<option value="gmail.com">gmail.com</option>
-										<option value="naver.com">naver.com</option>
-										<option value="nate.com">nate.com</option>
-										<option value="daum.net">daum.net</option>
+									<input class="joinInput" type="text" id="joinUserId" name="userId">
+									<input class="joinInput" type="text" id="email" name="email">
+									<select class="joinInput" id="emailSelect" style="text-align: center;">
+										<option value="">===직접 입력===</option>
+										<option value="@gmail.com">@gmail.com</option>
+										<option value="@naver.com">@naver.com</option>
+										<option value="@nate.com">@nate.com</option>
+										<option value="@daum.net">@daum.net</option>
 									</select>
 								</div>
 							</div>
@@ -285,7 +287,7 @@ body {
 							<div class="panel-joinContent">
 								<div>사용자명</div>
 								<div class="inputContainer">
-									<input class="joinInput" type="text" name="userName">
+									<input class="joinInput" type="text" id="userName" name="userName">
 								</div>
 							</div>
 							<div class="panel-joinContent">
@@ -324,6 +326,7 @@ body {
 			alert("패스워드를 입력하세요");
 			return;
 		}
+<<<<<<< HEAD
 		call_server(loginform, "/loginProcess", confirmLogin);
 <<<<<<< HEAD
 	}
@@ -337,12 +340,31 @@ body {
     }
 =======
 >>>>>>> refs/remotes/origin/main
+=======
+		
+		let param = {"userId" : $("#userId").val(),
+	               "password" : $("#password").val()
+	               };
+
+		$.ajax({
+		   url: "/loginProcess",
+		   data: param,
+		   type: 'post',
+		   success: function (result) {
+		      confirmLogin(result);
+		   },
+		   error: function (request, status, error) {
+		      console.log(error);
+		   }
+		})
+
+>>>>>>> branch 'main' of https://github.com/YoouHaa/TaskMaster.git
 
 	}
 
 	function confirmLogin(vo) {
 		if (vo.result) {
-			location.href = "/test";
+			location.href = "/admin";
 		} else {
 			alert(vo.msg);
 		}
@@ -412,7 +434,25 @@ body {
 	function join() {
 		if ($("#joinPassword").val() == $("#passwordCheck").val()) {
 			if ($("#company").val() != null && $("#company").val() != '') {
-				call_server(joinform, "/joinProcess", joinProcess);
+				// joinform
+				let param = {"userId" : $("#joinUserId").val(),
+							"email" : $("#email").val(), 
+			               	"password" : $("#joinPassword").val(),
+			               	"userName" : $("#userName").val(),
+			               	"companyCd" : $("#company").val()
+			               	};
+
+				$.ajax({
+				   url: "/joinProcess",
+				   data: param,
+				   type: 'post',
+				   success: function (result) {
+				      joinProcess(result);
+				   },
+				   error: function (request, status, error) {
+				      console.log(error);
+				   }
+				})
 			} else {
 				alert("회사를 선택해주세요.");
 			}
@@ -488,19 +528,38 @@ body {
 		return unescape(cookieValue);
 	}
 
-	// 콤보박스 회사명 꾸려주는 코드
+	// 회사명 콤보박스
 	$(function() {
-		call_server(hiddenform, "/comp/getCompName", getCompName);
+		$.ajax({
+		   url: "/comp/getCompName",
+		   type: 'post',
+		   success: function (result) {
+			   getCompName(result);
+		   },
+		   error: function (request, status, error) {
+		      console.log(error);
+		   }
+		})
 	});
 
 	function getCompName(list) {
 		var str;
-		console.log(list);
 		for (var i = 0; i < list.length; i++) {
 			str += "<option value='"+list[i].companyCd+"'>"
 					+ list[i].companyName + "</option>"
 		}
 		$("#company").append(str);
 	}
+	
+	// 이메일 콤보박스 
+	$("#emailSelect").change(function(){
+		$("#email").val($("#emailSelect").val());
+		// 선택된 값이 빈 문자열이 아닌 경우
+	    if($("#emailSelect").val() != ""){
+	        $("#email").prop("readonly", true);
+	    } else {
+	        $("#email").prop("readonly", false);
+	    }
+	})
 </script>
 </html>

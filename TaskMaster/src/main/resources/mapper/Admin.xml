@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.mysite.login.dao.LoginDao">
+<mapper namespace="com.mysite.admin.dao.AdminDao">
 	
 	<resultMap type="com.mysite.login.vo.UserInfoVO" id="userMap">
 		<result property="userId" 		column="USER_ID"/>
@@ -13,32 +13,34 @@
 		<result property="joinDate" 	column="JOIN_DATE"/>
 		<result property="email" 		column="EMAIL"/>
 	</resultMap>
-	<select id="selectUserInfo" resultMap="userMap">
+	<select id="getUserInfo" resultMap="userMap">
 		SELECT
-			USER_ID,
-			USER_NAME,
-			PASSWORD,
-			AUTH_YN,
-			COMP_ADMIN_YN
+		    t1.USER_ID,
+		    t1.USER_NAME,
+		    t1.AUTH_YN
 		FROM
+		    tb_user_info t1
+		JOIN
+		    (SELECT COMPANY_CD
+		     FROM TB_USER_INFO
+		     WHERE USER_ID = #{userId}) t2
+		ON
+		    t1.COMPANY_CD = t2.COMPANY_CD
+		WHERE
+			COMP_ADMIN_YN = 'N'
+	</select>
+	<update id="allowUser">
+		UPDATE
+			TB_USER_INFO
+		SET
+			AUTH_YN = 'Y'
+		WHERE
+			USER_ID = #{userId}
+	</update>
+	<delete id="deleteUser">
+		DELETE FROM
 			TB_USER_INFO
 		WHERE
 			USER_ID = #{userId}
-	</select>
-	<insert id="insertUserInfo">
-	    INSERT INTO TB_USER_INFO (
-	        USER_ID,
-	        USER_NAME,
-	        PASSWORD,
-	        COMPANY_CD,
-	        JOIN_DATE
-	    ) VALUES (
-	        CONCAT(#{userId}, #{email}),
-	        #{userName},
-	        #{password},
-	        #{companyCd},
-	        NOW()
-	    )
-	</insert>
-	
+	</delete>
 </mapper>

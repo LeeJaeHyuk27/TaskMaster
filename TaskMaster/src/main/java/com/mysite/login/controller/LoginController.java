@@ -60,23 +60,18 @@ public class LoginController {
 		return msgvo;
 	}
 	
-	@RequestMapping("/test")
-	public String test()throws Exception{
-		return "/test";
-	}
-	
 	// 회원가입
 	@RequestMapping("/joinProcess")
 	@ResponseBody
 	public MessageVO joinProcess(@ModelAttribute UserInfoVO vo)throws Exception{
 		
 		MessageVO msgvo = new MessageVO();
-		UserInfoVO vo2 = new UserInfoVO();
+		UserInfoVO vo_for_emailCheck = new UserInfoVO();
 		vo.setPassword(AesUtil.aesEncode(vo.getPassword()));
+		vo_for_emailCheck.setUserId(vo.getUserId());
+		vo_for_emailCheck = service.selectUserInfo(vo_for_emailCheck);
 		
-		vo2 = service.selectUserInfo(vo2);
-		
-		if(vo2!=null) {	// 등록 이메일일 경우
+		if(vo_for_emailCheck!=null) {	// 등록 이메일일 경우
 			msgvo.setResult(false);
 			msgvo.setMsg("이미 가입된 이메일 입니다.");
 		}else {  // 등록 이메일이 아닐경우
@@ -90,8 +85,5 @@ public class LoginController {
 		}
 		return msgvo;
 	}
-	@RequestMapping("/main")
-	public String main() throws Exception{
-		return "/main";
-	}
+
 }

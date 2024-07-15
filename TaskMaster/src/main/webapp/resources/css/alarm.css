@@ -1,0 +1,43 @@
+input {
+    display: block;
+    height: 30px;
+    padding: 5px;
+    margin: 5px;
+    width: 90%;
+}
+
+#container {
+    display: flex;
+    width: 700px;
+    margin: 30px auto;
+}
+
+#alarm_btn {
+    display: block;
+    width: 100px;
+    margin: 10px auto;
+}
+
+#getAlarm_btn {
+    display: block;
+    width: 130px;
+    margin: 10px auto;
+}
+
+.alarm_div{
+    width: 100%;
+    padding: 10px;
+    margin: 10px;
+    font-size: 12px;
+    border: 1px solid #9e9e9e;
+    border-radius: 5px;
+    background-color: #9e9e9e;
+}
+
+#form_container{
+    width: 100%;
+}
+
+#alarm_container{
+    width: 100%;
+}
