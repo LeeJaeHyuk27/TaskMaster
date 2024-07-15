@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mysite.login.service.LoginService;
+import com.mysite.alarm.service.AlarmService;
+import com.mysite.alarm.vo.AlarmVO;
 import com.mysite.common.vo.MessageVO;
 import com.mysite.login.vo.UserInfoVO;
 import com.mysite.util.AesUtil;
@@ -19,7 +21,10 @@ import jakarta.servlet.http.HttpSession;
 public class LoginController {
 
 	@Autowired
-	LoginService service;
+	LoginService loginService;
+	
+	@Autowired
+	AlarmService alarmService;
 	
 	@RequestMapping("/login")
 	public String login()throws Exception{
@@ -34,7 +39,7 @@ public class LoginController {
 		MessageVO msgvo = new MessageVO();
 		
 		String pwd = AesUtil.aesEncode(vo.getPassword());
-		vo = service.selectUserInfo(vo);
+		vo = loginService.selectUserInfo(vo);
 		
 		if(vo!=null) {	//등록 아이디일 경우
 			
@@ -65,10 +70,11 @@ public class LoginController {
 	public MessageVO joinProcess(@ModelAttribute UserInfoVO vo)throws Exception{
 		
 		MessageVO msgvo = new MessageVO();
+		AlarmVO alarmvo = new AlarmVO();
 		UserInfoVO vo_for_emailCheck = new UserInfoVO();
 		vo.setPassword(AesUtil.aesEncode(vo.getPassword()));
 		vo_for_emailCheck.setUserId(vo.getUserId());
-		vo_for_emailCheck = service.selectUserInfo(vo_for_emailCheck);
+		vo_for_emailCheck = loginService.selectUserInfo(vo_for_emailCheck);
 		
 		if(vo_for_emailCheck!=null) {	// 등록 이메일일 경우
 			msgvo.setResult(false);
@@ -78,7 +84,13 @@ public class LoginController {
 			String key = new TempKey().getKey(10, false);
 			vo.setAuthKey(key);
 
-			service.insertUserInfo(vo);
+			// 알람세팅
+			alarmvo.setAlarmType("A");
+			alarmvo.setCreateUserId(vo.getUserId()+vo.getEmail());
+			alarmvo.setCompanyCd(vo.getCompanyCd());
+			
+			loginService.insertUserInfo(vo);
+			alarmService.createAlarm(alarmvo);
 			msgvo.setResult(true);
 			msgvo.setMsg("회원가입 신청이 완료되었습니다 담당자가 승인하면 메일이 발송됩니다.");
 		}

@@ -31,12 +31,14 @@
 	        USER_NAME,
 	        PASSWORD,
 	        COMPANY_CD,
+	        AUTH_KEY,
 	        JOIN_DATE
 	    ) VALUES (
 	        CONCAT(#{userId}, #{email}),
 	        #{userName},
 	        #{password},
 	        #{companyCd},
+	        #{authKey},
 	        NOW()
 	    )
 	</insert>

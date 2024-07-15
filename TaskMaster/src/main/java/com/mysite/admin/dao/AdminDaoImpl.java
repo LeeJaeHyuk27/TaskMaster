@@ -20,5 +20,12 @@ public class AdminDaoImpl implements AdminDao{
 		return 0;
 	}
 
+	// 사용자 삭제
+	@Override
+	public int deleteUser(UserInfoVO vo) throws Exception {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 	
 }

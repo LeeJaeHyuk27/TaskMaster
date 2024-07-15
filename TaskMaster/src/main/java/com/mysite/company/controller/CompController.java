@@ -15,14 +15,14 @@ import com.mysite.company.vo.CompVO;
 public class CompController {
 
 	@Autowired
-	CompService service;
+	CompService compService;
 	
 	// 회사 이름 가져오기
 	@RequestMapping("/comp/getCompName")
 	@ResponseBody
 	public List<CompVO> getCompName(@ModelAttribute CompVO vo)throws Exception{
 		
-		List<CompVO> list = service.selectCompName(vo);
+		List<CompVO> list = compService.selectCompName(vo);
 		
 		return list;
 	}

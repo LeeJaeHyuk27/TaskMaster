@@ -12,10 +12,10 @@ import com.mysite.company.vo.CompVO;
 public class CompService {
 
 	@Autowired
-	CompDao dao;
+	CompDao compDao;
 	
 	// 회사 이름 가져오기
 	public List<CompVO> selectCompName(CompVO vo)throws Exception{
-		return dao.selectCompName(vo);
+		return compDao.selectCompName(vo);
 	}
 }

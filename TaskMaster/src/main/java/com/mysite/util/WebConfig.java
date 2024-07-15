@@ -1,4 +1,4 @@
-package com.mysite.config;
+package com.mysite.util;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;

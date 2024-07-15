@@ -18,7 +18,7 @@ import jakarta.servlet.http.HttpSession;
 public class AdminController {
 
 	@Autowired
-	AdminService service;
+	AdminService adminService;
 	
 	@RequestMapping("/admin")
 	public String admin() throws Exception{
@@ -33,7 +33,7 @@ public class AdminController {
 	    UserInfoVO uservo = (UserInfoVO) session.getAttribute("TaskMaster");
 	    vo.setUserId(uservo.getUserId());
 		
-		List<UserInfoVO> list = service.getUserInfo(vo);
+		List<UserInfoVO> list = adminService.getUserInfo(vo);
 		
 		return list;
 	}
@@ -43,7 +43,7 @@ public class AdminController {
 	@ResponseBody
 	public int allowUser(@ModelAttribute("UserInfoVO")UserInfoVO vo)throws Exception{
 		
-		int cnt = service.allowUser(vo);
+		int cnt = adminService.allowUser(vo);
 		
 		return cnt;
 	}
@@ -53,7 +53,7 @@ public class AdminController {
 	@ResponseBody
 	public int deleteUser(@ModelAttribute("UserInfoVO")UserInfoVO vo)throws Exception{
 		
-		int cnt = service.deleteUser(vo);
+		int cnt = adminService.deleteUser(vo);
 		
 		return cnt;
 	}

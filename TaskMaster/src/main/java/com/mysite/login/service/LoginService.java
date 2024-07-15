@@ -10,15 +10,15 @@ import com.mysite.login.vo.UserInfoVO;
 public class LoginService {
 
 	@Autowired
-	LoginDao dao;
+	LoginDao loginDao;
 	
 	// 로그인
 	public UserInfoVO selectUserInfo(UserInfoVO vo) throws Exception{
-		return dao.selectUserInfo(vo);
+		return loginDao.selectUserInfo(vo);
 	}
 	
 	// 회원가입
 	public int insertUserInfo(UserInfoVO vo) throws Exception{
-		return dao.insertUserInfo(vo);
+		return loginDao.insertUserInfo(vo);
 	}
 }

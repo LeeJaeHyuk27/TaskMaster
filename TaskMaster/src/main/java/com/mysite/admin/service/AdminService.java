@@ -12,20 +12,20 @@ import com.mysite.login.vo.UserInfoVO;
 public class AdminService {
 
 	@Autowired
-	AdminDao dao;
+	AdminDao adminDao;
 	
 	// 사용자 조회
 	public List<UserInfoVO> getUserInfo(UserInfoVO vo) throws Exception{
-		return dao.getUserInfo(vo);
+		return adminDao.getUserInfo(vo);
 	}
 	
 	// 사용자 승인
 	public int allowUser(UserInfoVO vo)throws Exception{
-		return dao.allowUser(vo);
+		return adminDao.allowUser(vo);
 	}
 	
 	// 사용자 삭제
 	public int deleteUser(UserInfoVO vo)throws Exception{
-		return dao.deleteUser(vo);
+		return adminDao.deleteUser(vo);
 	}
 }
