@@ -37,7 +37,6 @@ public class LoginController {
 	public MessageVO loginProcess(@ModelAttribute UserInfoVO vo, HttpServletRequest request) throws Exception{
 		
 		MessageVO msgvo = new MessageVO();
-		
 		String pwd = AesUtil.aesEncode(vo.getPassword());
 		vo = loginService.selectUserInfo(vo);
 		
