@@ -25,7 +25,8 @@ export function msg_show(msg, left, type) {
                     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
                     border-radius: 8px;
                     opacity: 0;
-                    padding: 8px 14px;">${msg}</span>`;
+                    padding: 8px 14px;
+                    text-align: center;">${msg}</span>`;
     
     $('body').append(msg_tag);
 
@@ -39,6 +40,6 @@ export function msg_show(msg, left, type) {
         }, 700, function(){
             $('.msg_tag').remove();
         });
-    }, 1200);
+    }, 1500);
     
 }

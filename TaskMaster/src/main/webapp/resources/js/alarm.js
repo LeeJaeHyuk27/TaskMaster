@@ -133,7 +133,7 @@ $(document).ready(function () {
 
 
     $('#msg_E_btn').click(function () {
-        common.msg_show("오류 메시지 공통 기능입니다. 12345", 43, "E");
+        common.msg_show("오류 메시지 공통 기능입니다.<br>12345", 43, "E");
     })
 
     $('#msg_W_btn').click(function () {
