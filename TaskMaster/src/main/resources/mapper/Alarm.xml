@@ -3,23 +3,27 @@
 <mapper namespace="com.mysite.alarm.dao.AlarmDao">
 
 	<insert id="createAlarm">
+		/* Alarm.xml/INSERT/createAlarm */
     	INSERT INTO PROJ.TB_ALARM (PROJECT_SEQ, TASK_SEQ, USER_ID, CREATE_USER_ID, ALARM_CONTENTS, ALARM_TYPE, READ_YN, REG_DATE)
     	VALUES (#{projectSeq}, #{taskSeq}, #{userId}, #{createUserId}, #{alarmContents}, #{alarmType}, 'N', NOW());
   	</insert>
 
   	<select id="getProjectName" resultType="string">
+		/* Alarm.xml/SELECT/getProjectName */
 		SELECT PROJECT_NAME
 		FROM PROJ.TB_PROJECT_INFO
 		WHERE PROJECT_SEQ = #{projectSeq}
 	</select>
 
 	<select id="getTaskName" resultType="string">
+		/* Alarm.xml/SELECT/getTaskName */
 		SELECT TASK_NAME
 		FROM PROJ.TB_TASK_INFO
 		WHERE TASK_SEQ = #{taskSeq}
 	</select>
 
 	<select id="getAlarm" resultType="com.mysite.alarm.vo.AlarmVO">
+		/* Alarm.xml/SELECT/getAlarm */
 		SELECT 
 			ALARM_SEQ AS alarmSeq,
 			PROJECT_SEQ AS projectSeq,
@@ -36,6 +40,7 @@
 	</select>
 
 	<select id="getCompanyAdminList" resultType="com.mysite.login.vo.UserInfoVO">
+		/* Alarm.xml/SELECT/getCompanyAdminList */
 		SELECT 
 			USER_ID AS userId
 		FROM PROJ.TB_USER_INFO
@@ -45,6 +50,7 @@
 	</select>
 
 	<select id="getTaskAllocationUserList" resultType="com.mysite.login.vo.UserInfoVO">
+		/* Alarm.xml/SELECT/getTaskAllocationUserList */
 		SELECT 
 			USER_ID AS userId
 		FROM PROJ.TB_TASK_MEMBER
@@ -53,6 +59,7 @@
 	</select>
 	
 	<select id="getReplyUser" resultType="com.mysite.login.vo.UserInfoVO">
+		/* Alarm.xml/SELECT/getReplyUser */
 		SELECT 
 			USER_ID AS userId
 		FROM PROJ.TB_TASK_REPLY
