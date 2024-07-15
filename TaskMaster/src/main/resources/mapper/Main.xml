@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mysite.main.dao.MainDao">
+
+	<resultMap type="com.mysite.main.vo.MainVO" id="mainMap">
+		<result property="userId" column="USER_ID" />
+		<result property="projectName" column="project_name" />
+		<result property="projectSeq" column="project_seq" />
+		<result property="favoritesYn" column="favorites_yn" />
+		<result property="taskProgress" column="task_progress" />
+		<result property="taskSeq" column="task_seq" />
+	</resultMap>
+	<select id="selectProject" resultMap="mainMap">
+		SELECT
+		A.PROJECT_SEQ,
+		A.PROJECT_NAME,
+		B.USER_ID,
+		B.FAVORITES_YN,
+		SUM(C.TASK_PROGRESS) /
+		COUNT(C.TASK_SEQ) AS TASK_PROGRESS
+		FROM
+		tb_project_info A
+		JOIN
+		tb_project_member B ON A.PROJECT_SEQ = B.PROJECT_SEQ
+		LEFT JOIN
+		tb_task_info C ON A.PROJECT_SEQ = C.PROJECT_SEQ
+		WHERE
+		B.USER_ID =
+		#{userId}
+		GROUP BY
+		A.PROJECT_SEQ,
+		A.PROJECT_NAME,
+		B.USER_ID,
+		B.FAVORITES_YN
+		ORDER BY
+		A.PROJECT_SEQ,
+		B.USER_ID
+	</select>
+	<update id="updateFavoritesYn">
+		UPDATE TB_PROJECT_MEMBER
+		SET FAVORITES_YN = CASE
+		WHEN FAVORITES_YN = 'Y' THEN 'N'
+		WHEN FAVORITES_YN = 'N' THEN 'Y'
+		END
+		WHERE USER_ID = #{userId}
+		AND PROJECT_SEQ = #{projectSeq}
+
+	</update>
+	<insert id ="insertNewProject">
+	INSERT INTO TB_PROJECT_INFO
+    (
+        PROJECT_SEQ,
+        PROJECT_NAME,
+        PROJECT_DESC,
+        START_DATE,
+        END_DATE,
+        COMPANY_CD,
+        REG_DATE,
+        REG_ID
+    )
+    SELECT
+        IFNULL(MAX(PROJECT_SEQ), 0) + 1,
+        #{projectName},
+        #{projectDesc},
+        #{startDate},
+        #{endDate},
+        (SELECT COMPANY_CD FROM tb_user_info WHERE USER_ID = #{userId}),
+        NOW(),
+        #{userId}
+    FROM tb_project_info;
+	</insert>
+
+
+</mapper>

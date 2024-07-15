@@ -326,6 +326,21 @@ body {
 			alert("패스워드를 입력하세요");
 			return;
 		}
+<<<<<<< HEAD
+		call_server(loginform, "/loginProcess", confirmLogin);
+<<<<<<< HEAD
+	}
+	
+	function confirmLogin(vo){
+        if(vo.result){
+            location.href="/main";
+        }else{
+            alert(vo.msg);
+        }
+    }
+=======
+>>>>>>> refs/remotes/origin/main
+=======
 		
 		let param = {"userId" : $("#userId").val(),
 	               "password" : $("#password").val()
@@ -343,6 +358,7 @@ body {
 		   }
 		})
 
+>>>>>>> branch 'main' of https://github.com/YoouHaa/TaskMaster.git
 
 	}
 

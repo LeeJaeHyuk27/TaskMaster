@@ -34,6 +34,7 @@ public class LoginController {
 		MessageVO msgvo = new MessageVO();
 		
 		String pwd = AesUtil.aesEncode(vo.getPassword());
+				
 		vo = service.selectUserInfo(vo);
 		
 		if(vo!=null) {	//등록 아이디일 경우

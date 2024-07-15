@@ -26,7 +26,10 @@ function call_server(f,url, cbFunc){
 				}
 		    }
 		});
+<<<<<<< HEAD
+=======
 	
+>>>>>>> refs/remotes/origin/main
 }
 
 
