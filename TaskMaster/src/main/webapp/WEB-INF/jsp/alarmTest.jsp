@@ -9,7 +9,7 @@
     </head>
     <link href="/resources/css/alarm.css" rel="stylesheet" />
     <script src="/resources/js/jquery-3.7.1.js"></script>
-    <script src="/resources/js/alarm.js"></script>
+    <script type="module" rel="script" src="/resources/js/alarm.js"></script>
     <body>
         <div id="container">
             <div id="form_container">
@@ -24,6 +24,11 @@
                 </form>
                 <button id="alarm_btn" type="button">알람 테스트</button>
                 <button id="getAlarm_btn" type="button">알람 조회 테스트</button>
+
+                <button id="msg_E_btn" type="button">에러 메시지</button>
+                <button id="msg_W_btn" type="button">경고 메시지</button>
+                <button id="msg_btn" type="button">일반 메시지</button>
+
             </div>
             <div id="alarm_container"></div>
         </div>
