@@ -97,7 +97,7 @@ body {
 #main-header {
 	width: 100%;
 	height: 80px;
-	background-color: #5b5b5b;
+	background-color: #ffffff;
 	text-align: center;
 	font-size: 2rem;
 }
@@ -123,7 +123,7 @@ body {
 #content-board {
 	position: relative;
 	flex-grow: 1;
-	background: #ffffff;
+	background: #f1f1f1;
 }
 
 .item_box {
@@ -169,19 +169,73 @@ body {
 	box-shadow: -12px 0px 5px 4px rgb(0 0 0/ 50%);
 }
 
-.nav-tab-table {
+.tab-table {
     width: 100%;
     background-color: black;
     color: white;
+    margin-bottom: 20px;
+    border-collapse: collapse;
 }
 
-.nav-tab-table tbody tr {
-	background-color: white;
-	color: black;
-	text-align: center;
-	border-bottom: 1px solid #ddd;
+.tab-table tbody tr {
+	height: 50px;
+    background-color: white;
+    color: black;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
 }
 
-.tab-pane.fade.show.active{
+.tab-item{
 	margin-bottom: 1000px;
+}
+
+.nav-tabs {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.nav-tabs li {
+    display: inline-block;
+   	margin: 0 5px;
+   	border-radius: 10px;
+   	width: 25%;
+}
+
+.nav-tabs li a {
+    display: block;
+    color: #000;
+    text-align: center;
+    padding: 14px 20px;
+    text-decoration: none;
+    border-radius: 10px;
+}
+
+.nav-tabs li a:hover {
+    background-color: #ddd;
+}
+
+.nav-tabs li a.active {
+    background-color: #00bfff;
+    color: white;
+}
+
+.allowBtn, .deleteBtn {
+    display: inline-block;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    border: none;
+    color: white;
+    background-color: #00bfff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.allowBtn:hover, .deleteBtn:hover {
+    background-color: #1e90ff;
 }

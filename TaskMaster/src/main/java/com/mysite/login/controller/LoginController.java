@@ -72,7 +72,7 @@ public class LoginController {
 		AlarmVO alarmvo = new AlarmVO();
 		UserInfoVO vo_for_emailCheck = new UserInfoVO();
 		vo.setPassword(AesUtil.aesEncode(vo.getPassword()));
-		vo_for_emailCheck.setUserId(vo.getUserId());
+		vo_for_emailCheck.setUserId(vo.getUserId()+vo.getEmail());
 		vo_for_emailCheck = loginService.selectUserInfo(vo_for_emailCheck);
 		
 		if(vo_for_emailCheck!=null) {	// 등록 이메일일 경우

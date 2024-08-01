@@ -5,17 +5,20 @@
 <head>
 <meta charset="UTF-8">
 <title>Admin Page</title>
-<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-<script src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-<script src="/resources/js/jquery-3.7.1.js"></script>
-<script src="/assets/bootstrap/js/bootstrap.bundle.min.js"></script>
-<link href="/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<!-- css -->
 <link href="/resources/css/admin.css" rel="stylesheet" />
+<!-- js -->
+<script src="/resources/js/jquery-3.7.1.js"></script>
+<script src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script src="/resources/js/pagination.js"></script>
 <script src="/resources/js/admin.js"></script>
+<link rel="stylesheet" href="/resources/css/pagination.css" />
 </head>
 <body>
+
 	<div id="main-container">
-	  <div id="main-header"></div>
+	  <div id="main-header"><%@ include file="layout/header.jsp" %></div>
 		<div id="main-content">
 			<div id="content-sidebar">
 				<p>sidebar 영역</p>
@@ -24,19 +27,13 @@
 				<div id="container">
 					<div id="item-container">
 						<!-- 회사 인증 승인 탭 -->
-						<ul class="nav nav-tabs nav-justified">
-							<li class="nav-item">
-								<a class="nav-link active" data-toggle="tab" href="#allowCompany">회사 인증 승인</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" data-toggle="tab" href="#userManaging">사용자 삭제</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" data-toggle="tab" href="#projectManaging">프로젝트 관리</a>
-							</li>
+						<ul id="allowCompany" class="nav-tabs">
+						    <li><a class="active" href="#allowCompany">회사 인증 승인</a></li>
+						    <li><a href="#userManaging">사용자 삭제</a></li>
+						    <li><a href="#projectManaging">프로젝트 관리</a></li>
 						</ul>
-						<div id="allowCompany" class="tab-pane fade show active">
-							<table class="nav-tab-table">
+						<div class="tab-item">
+							<table class="tab-table">
 								<colgroup>
 									<col style="width: 10%">
 									<col style="width: 20%">
@@ -54,19 +51,17 @@
 								<tbody id="allowCompanyTable">
 								</tbody>
 							</table>
+							<div id="allowCompany-pagination-container"></div>
 						</div>
 						<!-- 사용자 삭제 탭 -->
-						<ul class="nav nav-tabs nav-justified">
-							<li class="nav-item"><a class="nav-link" data-toggle="tab"
-								href="#allowCompany">회사 인증 승인</a></li>
-							<li class="nav-item"><a class="nav-link active"
-								data-toggle="tab" href="#userManaging">사용자 삭제</a></li>
-							<li class="nav-item"><a class="nav-link" data-toggle="tab"
-								href="#projectManaging">프로젝트 관리</a></li>
+						<ul id="userManaging" class="nav-tabs">
+						    <li><a href="#allowCompany">회사 인증 승인</a></li>
+						    <li><a class="active" href="#userManaging">사용자 삭제</a></li>
+						    <li><a href="#projectManaging">프로젝트 관리</a></li>
 						</ul>
-						<div id="userManaging" class="tab-pane fade show active"
+						<div class="tab-item"
 							style="width: 100%;">
-							<table class="nav-tab-table">
+							<table class="tab-table">
 								<colgroup>
 									<col style="width: 10%">
 									<col style="width: 20%">
@@ -84,19 +79,17 @@
 								<tbody id="userManagingTable">
 								</tbody>
 							</table>
+							<div id="userManaging-pagination-container"></div>
 						</div>
 						<!-- 프로젝트 관리 탭 -->
-						<ul class="nav nav-tabs nav-justified">
-							<li class="nav-item"><a class="nav-link" data-toggle="tab"
-								href="#allowCompany">회사 인증 승인</a></li>
-							<li class="nav-item"><a class="nav-link" data-toggle="tab"
-								href="#userManaging">사용자 삭제</a></li>
-							<li class="nav-item"><a class="nav-link active"
-								data-toggle="tab" href="#projectManaging">프로젝트 관리</a></li>
+						<ul id="projectManaging" class="nav-tabs">
+						    <li><a href="#allowCompany">회사 인증 승인</a></li>
+						    <li><a href="#userManaging">사용자 삭제</a></li>
+						    <li><a class="active" href="#projectManaging">프로젝트 관리</a></li>
 						</ul>
-						<div id="projectManaging" class="tab-pane fade show active"
+						<div class="tab-item"
 							style="width: 100%;">
-							<table class="nav-tab-table">
+							<table class="tab-table">
 							</table>
 						</div>
 					</div>

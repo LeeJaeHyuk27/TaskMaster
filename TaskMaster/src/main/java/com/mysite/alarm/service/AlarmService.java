@@ -12,4 +12,6 @@ public interface AlarmService {
     String createAlarm(AlarmVO vo) throws Exception;
 
     List<AlarmVO> getAlarm(String userId);
+    
+    int updateReadYn(int alarmSeq) throws Exception;
 }

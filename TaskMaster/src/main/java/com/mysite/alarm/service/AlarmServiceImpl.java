@@ -110,4 +110,11 @@ public class AlarmServiceImpl implements AlarmService {
         return alarmDao.getAlarm(userId);
     }
 
+	@Override
+	public int updateReadYn(int alarmSeq) throws Exception {
+		return alarmDao.updateReadYn(alarmSeq);
+	}
+
+
+
 }

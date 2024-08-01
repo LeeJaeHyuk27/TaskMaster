@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mysite.admin.service.AdminService;
+import com.mysite.alarm.service.AlarmService;
 import com.mysite.login.vo.UserInfoVO;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -19,6 +20,9 @@ public class AdminController {
 
 	@Autowired
 	AdminService adminService;
+	
+	@Autowired
+	AlarmService alarmService;
 	
 	@RequestMapping("/admin")
 	public String admin() throws Exception{

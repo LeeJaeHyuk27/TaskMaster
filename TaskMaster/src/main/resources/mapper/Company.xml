@@ -8,6 +8,7 @@
 	</resultMap>
 	
 	<select id="selectCompName" resultMap="compMap">
+		/* Company.xml/SELECT/selectCompName */
 		SELECT
 			COMPANY_CD,
 			COMPANY_NAME

@@ -1,11 +1,16 @@
+import * as common from "./common.js"
+
 // 로그인 버튼
+$('#login_btn').on('click',function(){
+   login();
+});
 function login() {
 	if ($('#userId').val() == '') {
-		alert("아이디를 입력하세요");
+		common.msg_show("아이디를 입력하세요", 45, "E");
 		return;
 	}
 	if ($('#password').val() == '') {
-		alert("패스워드를 입력하세요");
+		common.msg_show("패스워드를 입력하세요", 45, "E");
 		return;
 	}
 	
@@ -26,13 +31,13 @@ function login() {
 	})
 
 
-}
+common}
 
 function confirmLogin(vo) {
 	if (vo.result) {
-		location.href = "/admin";
+		location.href = "/main";
 	} else {
-		alert(vo.msg);
+		common.msg_show(vo.msg, 45, "E");
 	}
 }
 
@@ -82,7 +87,7 @@ $(function() {
 		let cb_width = $('#content-board').width();
 		let dx = e.clientX - startX;
 		let c_newWidth = containertWidth + dx + 10;
-		let p_newWidth = cb_width - c_newWidth - 110;
+		let p_newWidth = cb_width - c_newWidth - 50;
 
 		if (c_newWidth >= 450 && p_newWidth >= 450) {
 			$('#container').width(c_newWidth);
@@ -97,6 +102,9 @@ $(function() {
 })
 
 // 회원가입 프로세스
+$('#join_btn').on('click',function(){
+   join();
+});
 function join() {
 	if ($("#joinPassword").val() == $("#passwordCheck").val()) {
 		if ($("#company").val() != null && $("#company").val() != '') {
@@ -120,19 +128,19 @@ function join() {
 			   }
 			})
 		} else {
-			alert("회사를 선택해주세요.");
+			common.msg_show("회사를 선택해주세요.", 45, "E");
 		}
 	} else {
-		alert("패스워드를 확인해주세요.");
+		common.msg_show("패스워드를 확인해주세요.", 45, "E");
 	}
 }
 function joinProcess(vo) {
 	if (vo.result) {
-		alert(vo.msg);
+		common.msg_show(vo.msg, 45);
 		$('#joinform')[0].reset();
 		$('#closeBtn').click();
 	} else {
-		alert(vo.msg);
+		common.msg_show(vo.msg, 45, "E");
 	}
 }
 
@@ -206,6 +214,16 @@ $(function() {
 	      console.log(error);
 	   }
 	})
+	// 이메일 콤보박스 
+	$("#emailSelect").change(function(){
+		$("#email").val($("#emailSelect").val());
+		// 선택된 값이 빈 문자열이 아닌 경우
+	    if($("#emailSelect").val() != ""){
+	        $("#email").prop("readonly", true);
+	    } else {
+	        $("#email").prop("readonly", false);
+	    }
+	})
 });
 
 function getCompName(list) {
@@ -217,13 +235,3 @@ function getCompName(list) {
 	$("#company").append(str);
 }
 
-// 이메일 콤보박스 
-$("#emailSelect").change(function(){
-	$("#email").val($("#emailSelect").val());
-	// 선택된 값이 빈 문자열이 아닌 경우
-    if($("#emailSelect").val() != ""){
-        $("#email").prop("readonly", true);
-    } else {
-        $("#email").prop("readonly", false);
-    }
-})

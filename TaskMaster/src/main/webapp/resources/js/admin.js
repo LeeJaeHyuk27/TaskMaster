@@ -1,4 +1,3 @@
-
 // 회사 인증 승인/ 사용자 삭제 테이블
 $(function (){
 	$.ajax({
@@ -12,31 +11,53 @@ $(function (){
 		   }
 		})
 })
+function getUserInfo(list) {
+    var allowCompanyList = list.filter(item => item.authYn != "Y");
+    var userManagingList = list.filter(item => item.authYn == "Y");
 
-function getUserInfo(list){
-	var ACT = 1;
-	var UMT = 1;
-	for(var i = 0; i < list.length; i++){
-		if(list[i].authYn != "Y"){
-			var str = "<tr>";
-			str += "<td>"+(ACT)+"</td>";
-			str += "<td>"+list[i].userName+"</td>";
-			str += "<td>"+list[i].userId+"</td>";
-			str += "<td><button class=\"btn btn-primary\" type=\"button\" onclick=\"allow('"+list[i].userId+"');\">승인</button></td>";	
-			str += "</tr>";
-			$("#allowCompanyTable").append(str);
-			ACT++;
-		}else{
-			var str = "<tr>";
-			str += "<td>"+(UMT)+"</td>";
-			str += "<td>"+list[i].userName+"</td>";
-			str += "<td>"+list[i].userId+"</td>";
-			str += "<td><button class=\"btn btn-primary\" type=\"button\" onclick=\"dltUser('"+list[i].userId+"');\">삭제</button></td>";	
-			str += "</tr>";
-			$("#userManagingTable").append(str);
-			UMT++;
-		}
-	}
+    function renderAllowCompany(data, startIndex) {
+        $("#allowCompanyTable").empty();
+        data.forEach((item, index) => {
+            var str = "<tr>";
+            str += "<td>" + (startIndex + index + 1) + "</td>";
+            str += "<td>" + item.userName + "</td>";
+            str += "<td>" + item.userId + "</td>";
+            str += "<td><button class=\"allowBtn\" type=\"button\" onclick=\"allow('" + item.userId + "');\">승인</button></td>";
+            str += "</tr>";
+            $("#allowCompanyTable").append(str);
+        });
+    }
+
+    function renderUserManaging(data, startIndex) {
+        $("#userManagingTable").empty();
+        data.forEach((item, index) => {
+            var str = "<tr>";
+            str += "<td>" + (startIndex + index + 1) + "</td>";
+            str += "<td>" + item.userName + "</td>";
+            str += "<td>" + item.userId + "</td>";
+            str += "<td><button class=\"deleteBtn\" type=\"button\" onclick=\"dltUser('" + item.userId + "');\">삭제</button></td>";
+            str += "</tr>";
+            $("#userManagingTable").append(str);
+        });
+    }
+
+    $('#allowCompany-pagination-container').pagination({
+        dataSource: allowCompanyList,
+        pageSize: 5,
+        callback: function(data, pagination) {
+            var startIndex = (pagination.pageNumber - 1) * pagination.pageSize;
+            renderAllowCompany(data, startIndex);
+        }
+    });
+
+    $('#userManaging-pagination-container').pagination({
+        dataSource: userManagingList,
+        pageSize: 5,
+        callback: function(data, pagination) {
+            var startIndex = (pagination.pageNumber - 1) * pagination.pageSize;
+            renderUserManaging(data, startIndex);
+        }
+    });
 }
 
 // 회사 인증 승인

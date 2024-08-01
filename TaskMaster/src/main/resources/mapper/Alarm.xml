@@ -36,6 +36,7 @@
 			DATE_FORMAT(REG_DATE, '%Y-%m-%d %T' ) AS regDate
 		FROM PROJ.TB_ALARM
 		WHERE USER_ID = #{userId}
+		AND READ_YN = 'N'
 		ORDER BY ALARM_SEQ DESC
 	</select>
 
@@ -67,4 +68,13 @@
 			REPLY_SEQ = #{replySeq}
 	</select>
 	
+	<update id="updateReadYn">
+		/* Alarm.xml/UPDATE/updateReadYn */
+		UPDATE
+			TB_ALARM
+		SET
+			READ_YN = "Y"
+		WHERE
+			ALARM_SEQ = #{alarmSeq}
+	</update>
 </mapper>

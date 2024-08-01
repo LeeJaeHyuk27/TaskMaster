@@ -14,6 +14,7 @@
 		<result property="email" 		column="EMAIL"/>
 	</resultMap>
 	<select id="selectUserInfo" resultMap="userMap">
+		/* login.xml/SELECT/selectUserInfo */
 		SELECT
 			USER_ID,
 			USER_NAME,
@@ -26,6 +27,7 @@
 			USER_ID = #{userId}
 	</select>
 	<insert id="insertUserInfo">
+		/* login.xml/INSERT/insertUserInfo */
 	    INSERT INTO TB_USER_INFO (
 	        USER_ID,
 	        USER_NAME,

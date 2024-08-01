@@ -60,5 +60,7 @@ public interface AlarmDao {
 	 * @return UserInfoVO 대댓글이 작성된 댓글의 작성자 유저
 	 */
     public UserInfoVO getReplyUser(Integer replySeq);
+    
+    public int updateReadYn(int alarmSeq) throws Exception;
 	
 }

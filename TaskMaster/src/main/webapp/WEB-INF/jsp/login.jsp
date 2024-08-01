@@ -9,7 +9,7 @@
 <script src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 <script src="/resources/js/jquery-3.7.1.js"></script>
 <link href="/resources/css/login.css" rel="stylesheet" />
-<script src="/resources/js/login.js"></script>
+<script type="module" rel="script" src="/resources/js/login.js"></script>
 </head>
 <body style="overflow-x: hidden">
 	<main>
@@ -17,7 +17,7 @@
 			<div id="container">
 				<div class="card">
 					<div>
-						<h5 class="card-title">Task Master</h5>
+						<h5 class="card-title"><img src="/resources/img/logo.png"></h5>
 					</div>
 					<form id="loginform">
 						<div style="margin-bottom: 10px;">
@@ -43,7 +43,7 @@
 						</div>
 						<div style="text-align: center; margin-bottom: 10px;">
 							<button class="btn btn-primary w-100" type="button"
-								onclick="login();">로그인</button>
+								id="login_btn">로그인</button>
 						</div>
 						<div style="text-align: center;">
 							<button class="btn btn-secondary w-100" type="button"
@@ -105,7 +105,7 @@
 									</select>
 								</div>
 							</div>
-							<button class="joinBtn" type="button" onclick="join();">회원가입</button>
+							<button class="joinBtn" type="button" id="join_btn">회원가입</button>
 						</div>
 					</form>
 				</div>

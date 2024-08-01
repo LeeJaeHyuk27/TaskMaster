@@ -10,14 +10,14 @@
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 <script src="/resources/js/jquery-3.7.1.js"></script>
-<script src="/assets/bootstrap/js/bootstrap.bundle.min.js"></script>
-<link href="/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<!--script src="/assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+<link href="/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet"-->
 <script src="/resources/js/main.js"></script>
 <link href="/resources/css/main.css" rel="stylesheet" />
 </head>
 <body>
 	<div id="main-container">
-		<div id="main-header">header 영역</div>
+		<div id="main-header"><%@ include file="layout/header.jsp" %></div>
 		<div id="main-content">
 			<div id="content-sidebar">
 				<p>sidebar 영역</p>
